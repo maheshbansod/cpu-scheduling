@@ -84,8 +84,9 @@ void displayInformation() {
 			currjob->w_time = ct - currjob->a_time;
 			printf("%d p%d ",ct, currjob->pn);
 			state = 1;
-			currjob->burst--;
-		} else if(state == 0) {
+		}
+
+		if(state == 0) {
 			printf("%d (idle) ", ct);
 		} else if(state==1) {
 			currjob->burst--;

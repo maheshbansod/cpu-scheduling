@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-/** this program is under construction as it was found to have defects after rigourous testing by a meticulous and extremely enthusiastic tester**/
 
 //CPU scheduling - round robin
 //Processes are numbered from p0,..,pn by default
@@ -53,17 +52,14 @@ void buildProcessList(Process *p, int n) { //create linkedlist  sorted by arriva
 void removeProcess(Process *p) {
 	Process *temp = ps;
 	
-	if(p == ps) {
-		if(ps->next == ps) ps=NULL; //if there's only one element left
-		else
-			ps=ps->next;
+	if(p->next == p) {//if there's only one element left
+		ps=NULL;
 		return;
 	}
 
 	while(temp->next != ps && temp->next != p) {
 		temp=temp->next;
 	}
-	if(temp->next==ps) return;
 
 	temp->next = p->next;
 }
@@ -75,7 +71,6 @@ void displayInformation() {
 	int pt = 0; //time for which a process holds CPU continuously
 	int state = 0; //0- idle, 1- process running
 	float sumta=0,sumw=0;
-	
 	
 	printf("Gantt chart: \n");
 	while(ps != NULL) {
@@ -89,7 +84,7 @@ void displayInformation() {
 
 			if(pt == 0) { //start a process
 				temp->w_time += ct - temp->na_time;
-				printf("%d p%d \n",ct, temp->pn);
+				printf("%d p%d ",ct, temp->pn);
 				state=1;
 			}
 			
